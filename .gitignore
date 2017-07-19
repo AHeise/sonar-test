@@ -1,0 +1,18 @@
+/build
+.idea
+*/build
+.gradle
+.Rproj.user
+is_development
+*tmp*.*
+*.Rproj
+*.Rhistory
+output.ssv
+.classpath
+.project
+.settings
+*/data/*.ssv
+*/data/*.csv
+# ignore symbolic link
+/integrated-imputation/log_scripts
+config/
