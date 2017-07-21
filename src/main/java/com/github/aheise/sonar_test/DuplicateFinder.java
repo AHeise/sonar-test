@@ -24,16 +24,16 @@ public class DuplicateFinder {
 
   public <T> Set<Set<T>> findDuplicatesNoBlocking(List<T> elements,
       BiPredicate<T, T> duplicatePredicate) {
-    return createTransitiveClosure(Seq.seq(elements).innerJoin(elements,
+        return createTransitiveClosure(Seq.seq(elements).innerJoin(elements,
         (p1, p2) -> System.identityHashCode(p1) < System.identityHashCode(p2) &&
             duplicatePredicate.test(p1, p2)).
         map(pair -> Sets.newHashSet(pair.v1(), pair.v2())));
   }
 
-  <T> Set<Set<T>> createTransitiveClosure(Iterable<? extends Iterable<T>> partialClosures) {
-    Map<T, Set<T>> clusters = new IdentityHashMap<>();
+    <T> Set<Set<T>> createTransitiveClosure(Iterable<? extends Iterable<T>> partialClosures) {
+      Map<T, Set<T>> clusters = new IdentityHashMap<>();
 
-    for (Iterable<T> partialClosure : partialClosures) {
+      for (Iterable<T> partialClosure : partialClosures) {
       final Set<T> mergedCluster = Seq.seq(partialClosure)
           .map(clusters::get)
               .filter(Objects::nonNull)
